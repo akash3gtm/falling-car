@@ -7,7 +7,6 @@ export default function App() {
     <>
       <Canvas>
         <Physics broadphase="SAP" gravity={[0, -2.6, 0]}>
-          <axesHelper args={[10]} />
           <Scene />
         </Physics>
       </Canvas>
