@@ -5,7 +5,7 @@ import { Quaternion, Vector3 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useControls } from "./useControls";
 import { useWheels } from "./useWheels";
-import { WheelDebug } from "./WheelDebug";
+// import { WheelDebug } from "./WheelDebug";
 
 export function Car({ thirdPerson }) {
   // thanks to the_86_guy!
@@ -14,6 +14,7 @@ export function Car({ thirdPerson }) {
     GLTFLoader,
     process.env.PUBLIC_URL + "/models/car.glb"
   ).scene;
+  // console.log(result);
 
   const position = [-1.5, 0.5, 3];
   const width = 0.15;
@@ -29,7 +30,7 @@ export function Car({ thirdPerson }) {
       mass: 150,
       position,
     }),
-    useRef(null),
+    useRef(null)
   );
 
   const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
@@ -40,26 +41,28 @@ export function Car({ thirdPerson }) {
       wheelInfos,
       wheels,
     }),
-    useRef(null),
+    useRef(null)
   );
 
   useControls(vehicleApi, chassisApi);
 
   useFrame((state) => {
-    if(!thirdPerson) return;
+    if (!thirdPerson) return;
 
-    let position = new Vector3(0,0,0);
+    let position = new Vector3(0, 0, 0);
     position.setFromMatrixPosition(chassisBody.current.matrixWorld);
 
     let quaternion = new Quaternion(0, 0, 0, 0);
     quaternion.setFromRotationMatrix(chassisBody.current.matrixWorld);
 
-    let wDir = new Vector3(0,0,1);
+    let wDir = new Vector3(0, 0, 1);
     wDir.applyQuaternion(quaternion);
     wDir.normalize();
 
-    let cameraPosition = position.clone().add(wDir.clone().multiplyScalar(1).add(new Vector3(0, 0.3, 0)));
-    
+    let cameraPosition = position
+      .clone()
+      .add(wDir.clone().multiplyScalar(1).add(new Vector3(0, 0.3, 0)));
+
     wDir.add(new Vector3(0, 0.2, 0));
     state.camera.position.copy(cameraPosition);
     state.camera.lookAt(position);
@@ -69,7 +72,7 @@ export function Car({ thirdPerson }) {
     if (!result) return;
 
     let mesh = result;
-    mesh.scale.set(0.0012, 0.0012, 0.0012);
+    mesh.scale.set(0.0015, 0.0015, 0.0015);
 
     mesh.children[0].position.set(-365, -18, -67);
   }, [result]);
@@ -77,18 +80,22 @@ export function Car({ thirdPerson }) {
   return (
     <group ref={vehicle} name="vehicle">
       <group ref={chassisBody} name="chassisBody">
-        <primitive object={result} rotation-y={Math.PI} position={[0, -0.09, 0]}/>
+        <primitive
+          object={result}
+          rotation-y={Math.PI}
+          position={[0, -0.09, 0]}
+        />
       </group>
-      
+
       {/* <mesh ref={chassisBody}>
         <meshBasicMaterial transparent={true} opacity={0.3} />
         <boxGeometry args={chassisBodyArgs} />
       </mesh> */}
 
-      <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
+      {/* <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
       <WheelDebug wheelRef={wheels[1]} radius={wheelRadius} />
       <WheelDebug wheelRef={wheels[2]} radius={wheelRadius} />
-      <WheelDebug wheelRef={wheels[3]} radius={wheelRadius} />
+      <WheelDebug wheelRef={wheels[3]} radius={wheelRadius} /> */}
     </group>
   );
 }

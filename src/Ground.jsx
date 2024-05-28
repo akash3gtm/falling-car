@@ -7,10 +7,10 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 export function Ground() {
   const [ref] = usePlane(
-    () => ({ 
-      type: 'Static', 
-      rotation: [-Math.PI / 2, 0, 0] }
-    ), 
+    () => ({
+      type: "Static",
+      rotation: [-Math.PI / 2, 0, 0],
+    }),
     useRef(null)
   );
 
@@ -19,10 +19,10 @@ export function Ground() {
     process.env.PUBLIC_URL + "/textures/grid.png"
   );
 
-  const aoMap = useLoader(
-    TextureLoader,
-    process.env.PUBLIC_URL + "/textures/ground-ao.png"
-  );
+  // const aoMap = useLoader(
+  //   TextureLoader,
+  //   process.env.PUBLIC_URL + "/textures/ground-ao.png"
+  // );
 
   const alphaMap = useLoader(
     TextureLoader,
@@ -52,8 +52,9 @@ export function Ground() {
     <>
       <mesh
         ref={meshRef2}
-        position={[-2.285, -0.01, -1.325]}
+        position={[-4.4, -0.01, 2.5]}
         rotation-x={-Math.PI * 0.5}
+        scale={[1.1, 1.1, 1]}
       >
         <planeGeometry args={[12, 12]} />
         <meshBasicMaterial
@@ -66,20 +67,20 @@ export function Ground() {
 
       <mesh
         ref={meshRef}
-        position={[-2.285, -0.015, -1.325]}
+        position={[-4.4, -0.015, 2.5]}
         rotation-x={-Math.PI * 0.5}
         rotation-z={-0.079}
+        scale={[1.1, 1.1, 1]}
       >
         <circleGeometry args={[6.12, 50]} />
         <MeshReflectorMaterial
-          aoMap={aoMap}
+          // aoMap={aoMap}
           alphaMap={alphaMap}
           transparent={true}
           color={[0.5, 0.5, 0.5]}
           envMapIntensity={0.35}
           metalness={0.05}
           roughness={0.4}
-
           dithering={true}
           blur={[1024, 512]} // Blur ground reflections (width, heigt), 0 skips blur
           mixBlur={3} // How much blur mixes with surface roughness (default = 1)
