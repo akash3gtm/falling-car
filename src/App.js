@@ -52,7 +52,7 @@ export default function App() {
         <p>press w a s d to move</p>
         <p>press k to swap camera</p>
         <p>press r to reset</p>
-        <p>press arrows for flips</p>
+        {/* <p>press arrows for flips</p> */}
       </div>
       {/* <Controls
         controls={{
