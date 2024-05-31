@@ -2,7 +2,7 @@ import { useLoader } from "@react-three/fiber";
 import { useEffect } from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
-import { ColliderBox } from "./ColliderBox";
+// import { ColliderBox } from "./ColliderBox";
 import { Ramp } from "./Ramp";
 
 export function Track() {
@@ -25,15 +25,12 @@ export function Track() {
   return (
     <>
       <mesh geometry={geometry}>
-        <meshBasicMaterial
-          toneMapped={false}
-          map={colorMap}
-        />
+        <meshBasicMaterial toneMapped={false} map={colorMap} />
       </mesh>
 
       <Ramp />
-      
-      <ColliderBox position={[1.75, 0, 0.5]} scale={[0.3, 1, 0.3]}/>
+
+      {/* <ColliderBox position={[1.75, 0, 0.5]} scale={[0.3, 1, 0.3]}/>
       <ColliderBox position={[2.5, 0, -1.4]} scale={[0.3, 1, 0.3]}/>
       <ColliderBox position={[0.6, 0, -3.8]} scale={[0.3, 1, 0.3]}/>
       <ColliderBox position={[-1.95, 0, -5.18]} scale={[0.3, 1, 0.3]}/>
@@ -63,7 +60,7 @@ export function Track() {
       <ColliderBox position={[-4.53,0,-0.65]} scale={[0.1, 0.5, 0.1]}/>
       <ColliderBox position={[-4.15,0,-0.67]} scale={[0.1, 0.5, 0.1]}/>
       <ColliderBox position={[-4.9,0,-0.58]} scale={[0.1, 0.5, 0.1]}/>
-      <ColliderBox position={[-0.3,0,1]} scale={[0.1, 0.5, 0.1]}/>
+      <ColliderBox position={[-0.3,0,1]} scale={[0.1, 0.5, 0.1]}/> */}
     </>
   );
 }
